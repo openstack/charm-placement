@@ -1,0 +1,23 @@
+name: placement
+summary: OpenStack placement service
+maintainer: OpenStack Charmers <openstack-charmers@lists.ubuntu.com>
+description: |
+  OpenStack Placement provides an HTTP service for managing, selecting,
+  and claiming providers of classes of inventory representing available
+  resources in a cloud.
+  .
+  OpenStack Train or later is required.
+tags:
+  - openstack
+series:
+  - bionic
+  - eoan
+subordinate: false
+requires:
+  shared-db:
+    interface: mysql-shared
+  identity-service:
+    interface: keystone
+provides:
+  placement:
+    interface: placement

@@ -1,0 +1,17 @@
+includes:
+  - layer:leadership
+  - layer:openstack-api
+  - interface:mysql-shared
+  - interface:keystone
+  - interface:placement
+  - interface:hacluster
+  - interface:openstack-ha
+options:
+  basic:
+    use_venv: True
+    include_system_packages: False
+    packages: [ 'libffi-dev', 'libssl-dev' ]
+    repo: https://opendev.org/openstack/charm-placement
+config:
+  deletes:
+    - verbose

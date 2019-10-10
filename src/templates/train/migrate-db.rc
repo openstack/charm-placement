@@ -1,0 +1,13 @@
+NOVA_API_DB="nova_api"
+NOVA_API_USER="nova"
+{% if shared_db.host -%}
+NOVA_API_PASS="{{ shared_db.get_password(prefix='novaapi') }}"
+NOVA_API_DB_HOST="{{ shared_db.host }}"
+{%- endif %}
+PLACEMENT_DB="placement"
+PLACEMENT_USER="placement"
+{% if shared_db.host -%}
+PLACEMENT_PASS="{{ shared_db.get_password(prefix='placement') }}"
+PLACEMENT_DB_HOST="{{ shared_db.host }}"
+{%- endif %}
+MIGRATE_TABLES="allocations placement_aggregates consumers inventories projects resource_classes resource_provider_aggregates resource_provider_traits resource_providers traits users"

@@ -62,6 +62,7 @@ class PlacementCharm(charms_openstack.charm.HAOpenStackCharm):
     package_codenames = {
         'placement-common': collections.OrderedDict([
             ('2', 'train'),
+            ('3', 'ussuri'),
         ]),
     }
 

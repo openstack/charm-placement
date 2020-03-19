@@ -34,6 +34,9 @@ class PlacementCharm(charms_openstack.charm.HAOpenStackCharm):
 
     packages = ['placement-api', 'python3-pymysql', 'mysql-client']
 
+    # Python version used to execute installed workload
+    python_version = 3
+
     api_ports = {
         'placement-api': {
             os_ip.PUBLIC: 8778,

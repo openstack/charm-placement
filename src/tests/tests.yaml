@@ -9,5 +9,10 @@ configure:
   - zaza.openstack.charm_tests.nova.setup.manage_ssh_key
 gate_bundles:
   - bionic-train
+  - bionic-ussuri
+  - focal-ussuri
 smoke_bundles:
   - bionic-train
+tests_options:
+  force_deploy:
+    - focal-ussuri

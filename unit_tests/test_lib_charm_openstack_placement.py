@@ -12,9 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
-from __future__ import print_function
-
 from unittest.mock import patch, call
 
 import charms_openstack.test_utils as test_utils

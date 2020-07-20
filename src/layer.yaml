@@ -14,4 +14,9 @@ options:
     repo: https://opendev.org/openstack/charm-placement
 config:
   deletes:
+    - ssl_ca
+    - ssl_cert
+    - ssl_key
+    - use-syslog
     - verbose
+    - worker-multiplier

@@ -27,6 +27,18 @@ relations:
 - [ placement, mysql ]
 - [ placement, keystone ]
 - [ placement, nova-cloud-controller ]
+- - vault:shared-db
+  - mysql:shared-db
+- - vault:certificates
+  - keystone:certificates
+- - vault:certificates
+  - placement:certificates
+- - vault:certificates
+  - neutron-api:certificates
+- - vault:certificates
+  - glance:certificates
+- - vault:certificates
+  - nova-cloud-controller:certificates
 applications:
   rabbitmq-server:
     charm: cs:~openstack-charmers-next/rabbitmq-server
@@ -89,3 +101,6 @@ applications:
     options:
       openstack-origin: cloud:bionic-train
       debug: true
+  vault:
+    num_units: 1
+    charm: cs:~openstack-charmers-next/vault

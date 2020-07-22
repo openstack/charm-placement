@@ -20,6 +20,7 @@ machines:
   '8':
   '9':
   '10':
+  '11':
 
 
 applications:
@@ -33,6 +34,8 @@ applications:
   neutron-api-mysql-router:
     charm: cs:~openstack-charmers-next/mysql-router
   placement-mysql-router:
+    charm: cs:~openstack-charmers-next/mysql-router
+  vault-mysql-router:
     charm: cs:~openstack-charmers-next/mysql-router
 
   mysql-innodb-cluster:
@@ -129,6 +132,12 @@ applications:
     to:
       - '10'
 
+  vault:
+    num_units: 1
+    charm: cs:~openstack-charmers-next/vault
+    to:
+      - '11'
+
 relations:
 
   - - 'keystone:shared-db'
@@ -212,3 +221,19 @@ relations:
 
   - - 'placement'
     - 'nova-cloud-controller'
+
+  - - 'vault:shared-db'
+    - 'vault-mysql-router:shared-db'
+  - - 'vault-mysql-router:db-router'
+    - 'mysql-innodb-cluster:db-router'
+
+  - - 'vault:certificates'
+    - 'keystone:certificates'
+  - - 'vault:certificates'
+    - 'placement:certificates'
+  - - 'vault:certificates'
+    - 'neutron-api:certificates'
+  - - 'vault:certificates'
+    - 'glance:certificates'
+  - - 'vault:certificates'
+    - 'nova-cloud-controller:certificates'

@@ -37,7 +37,9 @@ charms_openstack.charm.use_defaults(
 @reactive.when('identity-service.available')
 def render_config(*args):
     with charms_openstack.charm.provide_charm_instance() as placement_charm:
-        placement_charm.configure_tls()
+        placement_charm.configure_tls(
+            certificates_interface=reactive.endpoint_from_flag(
+                'certificates.available'))
         placement_charm.upgrade_if_available(args)
         placement_charm.render_with_interfaces(args)
         placement_charm.assess_status()

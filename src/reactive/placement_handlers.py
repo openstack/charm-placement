@@ -16,6 +16,7 @@ import charms.reactive as reactive
 
 import charms_openstack.bus
 import charms_openstack.charm
+import charmhelpers.core as ch_core
 
 charms_openstack.bus.discover()
 
@@ -37,9 +38,22 @@ charms_openstack.charm.use_defaults(
 @reactive.when('identity-service.available')
 def render_config(*args):
     with charms_openstack.charm.provide_charm_instance() as placement_charm:
+        pre_ssl_enabled = placement_charm.get_state('ssl.enabled')
         placement_charm.configure_tls(
             certificates_interface=reactive.endpoint_from_flag(
                 'certificates.available'))
+        ssl_enabled = placement_charm.get_state('ssl.enabled')
+        if ssl_enabled != pre_ssl_enabled:
+            ch_core.hookenv.log((
+                "Detected switch to ssl.enabled: {}. "
+                "Informing keystone.").format(ssl_enabled))
+            keystone = reactive.endpoint_from_flag(
+                'identity-service.available')
+            keystone.register_endpoints(placement_charm.service_type,
+                                        placement_charm.region,
+                                        placement_charm.public_url,
+                                        placement_charm.internal_url,
+                                        placement_charm.admin_url)
         placement_charm.upgrade_if_available(args)
         placement_charm.render_with_interfaces(args)
         placement_charm.assess_status()

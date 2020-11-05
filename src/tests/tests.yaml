@@ -17,10 +17,9 @@ gate_bundles:
   - bionic-ussuri
   - focal-ussuri
   - focal-victoria
+  - groovy-victoria
 smoke_bundles:
   - bionic-train
-dev_bundles:
-  - groovy-victoria
 tests_options:
   force_deploy:
     - groovy-victoria

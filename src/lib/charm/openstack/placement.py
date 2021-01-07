@@ -50,7 +50,7 @@ class PlacementCharm(charms_openstack.charm.HAOpenStackCharm):
     default_service = 'placement-api'
     services = ['apache2', 'haproxy']
 
-    required_relations = ['shared-db', 'identity-service']
+    required_relations = ['shared-db', 'identity-service', 'placement']
 
     restart_map = {
         PLACEMENT_CONF: services,

@@ -7,7 +7,10 @@
       - bionic-ussuri
       - focal-ussuri
       - focal-victoria
+      - focal-wallaby
       - groovy-victoria
+      # disabled due to layer-basic issue; we'll get re-enabled shortly.
+      #- hirsute-wallaby
     vars:
       needs_charm_build: true
       charm_build_name: placement

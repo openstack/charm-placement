@@ -67,6 +67,7 @@ class PlacementCharm(charms_openstack.charm.HAOpenStackCharm):
             ('2', 'train'),
             ('3', 'ussuri'),
             ('4', 'victoria'),
+            ('5', 'wallaby'),
         ]),
     }
 

@@ -8,9 +8,12 @@
       - focal-ussuri
       - focal-victoria
       - focal-wallaby
-      - groovy-victoria
-      # disabled due to layer-basic issue; we'll get re-enabled shortly.
-      #- hirsute-wallaby
+      - focal-xena:
+          voting: false
+      - hirsute-wallaby:
+         voting: false
+      - impish-xena:
+         voting: false
     vars:
       needs_charm_build: true
       charm_build_name: placement

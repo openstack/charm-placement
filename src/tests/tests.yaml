@@ -22,14 +22,15 @@ gate_bundles:
   - focal-ussuri
   - focal-victoria
   - focal-wallaby
-  - groovy-victoria
 
 smoke_bundles:
   - bionic-train
 
 dev_bundles:
+  - focal-xena
   - hirsute-wallaby
+  - impish-xena
 
 tests_options:
   force_deploy:
-    - hirsute-wallaby
+    - impish-xena

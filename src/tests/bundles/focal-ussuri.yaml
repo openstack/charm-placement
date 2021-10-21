@@ -27,22 +27,16 @@ applications:
 
   keystone-mysql-router:
     charm: cs:~openstack-charmers/mysql-router
-    channel: candidate
   nova-cloud-controller-mysql-router:
     charm: cs:~openstack-charmers/mysql-router
-    channel: candidate
   glance-mysql-router:
     charm: cs:~openstack-charmers/mysql-router
-    channel: candidate
   neutron-api-mysql-router:
     charm: cs:~openstack-charmers/mysql-router
-    channel: candidate
   placement-mysql-router:
     charm: cs:~openstack-charmers/mysql-router
-    channel: candidate
   vault-mysql-router:
     charm: cs:~openstack-charmers/mysql-router
-    channel: candidate
 
   mysql-innodb-cluster:
     charm: cs:~openstack-charmers/mysql-innodb-cluster
@@ -53,7 +47,6 @@ applications:
       - '0'
       - '1'
       - '2'
-    channel: candidate
 
   rabbitmq-server:
     charm: cs:~openstack-charmers/rabbitmq-server
@@ -63,7 +56,6 @@ applications:
       source: *openstack-origin
     to:
       - '3'
-    channel: candidate
 
   glance:
     charm: cs:~openstack-charmers/glance
@@ -73,7 +65,6 @@ applications:
       openstack-origin: *openstack-origin
     to:
       - '4'
-    channel: candidate
 
   keystone:
     charm: cs:~openstack-charmers/keystone
@@ -83,7 +74,6 @@ applications:
       admin-password: openstack
     to:
       - '5'
-    channel: candidate
 
   neutron-api:
     charm: cs:~openstack-charmers/neutron-api
@@ -96,11 +86,9 @@ applications:
       neutron-security-groups: true
     to:
       - '6'
-    channel: candidate
 
   neutron-openvswitch:
     charm: cs:~openstack-charmers/neutron-openvswitch
-    channel: candidate
 
   neutron-gateway:
     charm: cs:~openstack-charmers/neutron-gateway
@@ -110,7 +98,6 @@ applications:
       bridge-mappings: physnet1:br-ex
     to:
       - '7'
-    channel: candidate
 
   nova-cloud-controller:
     charm: cs:~openstack-charmers/nova-cloud-controller
@@ -121,7 +108,6 @@ applications:
       debug: true
     to:
       - '8'
-    channel: candidate
 
   nova-compute:
     charm: cs:~openstack-charmers/nova-compute
@@ -135,7 +121,6 @@ applications:
       debug: true
     to:
       - '9'
-    channel: candidate
 
   placement:
     charm: ../../../placement
@@ -152,7 +137,6 @@ applications:
     charm: cs:~openstack-charmers/vault
     to:
       - '11'
-    channel: candidate
 
 relations:
 

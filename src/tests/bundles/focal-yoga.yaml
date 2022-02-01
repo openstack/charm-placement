@@ -1,6 +1,8 @@
 variables:
   openstack-origin: &openstack-origin cloud:focal-yoga
 
+local_overlay_enabled: False
+
 series: focal
 
 comment:
@@ -138,7 +140,7 @@ applications:
     channel: latest/edge
 
   placement:
-    charm: ../../../placement
+    charm: ../../../placement.charm
     num_units: 1
     constraints: mem=1G
     options:

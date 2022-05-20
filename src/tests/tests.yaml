@@ -20,17 +20,11 @@ gate_bundles:
   - bionic-train
   - bionic-ussuri
   - focal-ussuri
-  - focal-victoria
-  - focal-wallaby
 
 smoke_bundles:
-  - bionic-train
+  - focal-ussuri
 
-dev_bundles:
-  - focal-xena
-  - hirsute-wallaby
-  - impish-xena
+dev_bundles: []
 
 tests_options:
-  force_deploy:
-    - impish-xena
+  force_deploy: []

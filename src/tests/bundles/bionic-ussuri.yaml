@@ -1,3 +1,5 @@
+local_overlay_enabled: False
+
 series: bionic
 relations:
 - [ keystone, mysql ]
@@ -41,29 +43,33 @@ relations:
   - nova-cloud-controller:certificates
 applications:
   rabbitmq-server:
-    charm: cs:~openstack-charmers/rabbitmq-server
+    charm: ch:rabbitmq-server
     num_units: 1
     constraints: mem=1G
+    channel: 3.8/edge
   glance:
-    charm: cs:~openstack-charmers/glance
+    charm: ch:glance
     num_units: 1
     constraints: mem=1G
     options:
       openstack-origin: cloud:bionic-ussuri
+    channel: ussuri/edge
   keystone:
-    charm: cs:~openstack-charmers/keystone
+    charm: ch:keystone
     num_units: 1
     options:
       admin-password: openstack
       openstack-origin: cloud:bionic-ussuri
+    channel: ussuri/edge
   mysql:
-    charm: cs:~openstack-charmers/percona-cluster
+    charm: ch:percona-cluster
     num_units: 1
     options:
       innodb-buffer-pool-size: 256M
       max-connections: 1000
+    channel: 5.7/edge
   neutron-api:
-    charm: cs:~openstack-charmers/neutron-api
+    charm: ch:neutron-api
     num_units: 1
     options:
       manage-neutron-plugin-legacy-mode: true
@@ -71,23 +77,27 @@ applications:
       flat-network-providers: physnet1
       neutron-security-groups: true
       openstack-origin: cloud:bionic-ussuri
+    channel: ussuri/edge
   neutron-openvswitch:
-    charm: cs:~openstack-charmers/neutron-openvswitch
+    charm: ch:neutron-openvswitch
+    channel: ussuri/edge
   neutron-gateway:
-    charm: cs:~openstack-charmers/neutron-gateway
+    charm: ch:neutron-gateway
     num_units: 1
     options:
       bridge-mappings: physnet1:br-ex
       openstack-origin: cloud:bionic-ussuri
+    channel: ussuri/edge
   nova-cloud-controller:
-    charm: cs:~openstack-charmers/nova-cloud-controller
+    charm: ch:nova-cloud-controller
     num_units: 1
     options:
       network-manager: Neutron
       openstack-origin: cloud:bionic-ussuri
       debug: true
+    channel: ussuri/edge
   nova-compute:
-    charm: cs:~openstack-charmers/nova-compute
+    charm: ch:nova-compute
     num_units: 1
     constraints: mem=4G
     options:
@@ -96,8 +106,9 @@ applications:
       migration-auth-type: ssh
       openstack-origin: cloud:bionic-ussuri
       debug: true
+    channel: ussuri/edge
   placement:
-    charm: ../../../placement
+    charm: ../../../placement.charm
     num_units: 1
     constraints: mem=1G
     options:
@@ -105,4 +116,5 @@ applications:
       debug: true
   vault:
     num_units: 1
-    charm: cs:~openstack-charmers/vault
+    charm: ch:vault
+    channel: 1.7/edge

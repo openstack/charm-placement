@@ -10,7 +10,6 @@ description: |
 tags:
 - openstack
 series:
-- focal
 - jammy
 subordinate: false
 requires:

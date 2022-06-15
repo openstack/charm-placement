@@ -29,22 +29,22 @@ applications:
 
   keystone-mysql-router:
     charm: ch:mysql-router
-    channel: latest/edge
+    channel: 8.0/edge
   nova-cloud-controller-mysql-router:
     charm: ch:mysql-router
-    channel: latest/edge
+    channel: 8.0/edge
   glance-mysql-router:
     charm: ch:mysql-router
-    channel: latest/edge
+    channel: 8.0/edge
   neutron-api-mysql-router:
     charm: ch:mysql-router
-    channel: latest/edge
+    channel: 8.0/edge
   placement-mysql-router:
     charm: ch:mysql-router
-    channel: latest/edge
+    channel: 8.0/edge
   vault-mysql-router:
     charm: ch:mysql-router
-    channel: latest/edge
+    channel: 8.0/edge
 
   mysql-innodb-cluster:
     charm: ch:mysql-innodb-cluster
@@ -55,7 +55,7 @@ applications:
       - '0'
       - '1'
       - '2'
-    channel: latest/edge
+    channel: 8.0/edge
 
   rabbitmq-server:
     charm: ch:rabbitmq-server
@@ -65,7 +65,7 @@ applications:
       source: *openstack-origin
     to:
       - '3'
-    channel: latest/edge
+    channel: 3.9/edge
 
   glance:
     charm: ch:glance
@@ -75,7 +75,7 @@ applications:
       openstack-origin: *openstack-origin
     to:
       - '4'
-    channel: latest/edge
+    channel: yoga/edge
 
   keystone:
     charm: ch:keystone
@@ -85,7 +85,7 @@ applications:
       admin-password: openstack
     to:
       - '5'
-    channel: latest/edge
+    channel: yoga/edge
 
   neutron-api:
     charm: ch:neutron-api
@@ -98,11 +98,11 @@ applications:
       neutron-security-groups: true
     to:
       - '6'
-    channel: latest/edge
+    channel: yoga/edge
 
   neutron-openvswitch:
     charm: ch:neutron-openvswitch
-    channel: latest/edge
+    channel: yoga/edge
 
   neutron-gateway:
     charm: ch:neutron-gateway
@@ -112,7 +112,7 @@ applications:
       bridge-mappings: physnet1:br-ex
     to:
       - '7'
-    channel: latest/edge
+    channel: yoga/edge
 
   nova-cloud-controller:
     charm: ch:nova-cloud-controller
@@ -123,7 +123,7 @@ applications:
       debug: true
     to:
       - '8'
-    channel: latest/edge
+    channel: yoga/edge
 
   nova-compute:
     charm: ch:nova-compute
@@ -137,7 +137,7 @@ applications:
       debug: true
     to:
       - '9'
-    channel: latest/edge
+    channel: yoga/edge
 
   placement:
     charm: ../../../placement.charm
@@ -154,7 +154,7 @@ applications:
     charm: ch:vault
     to:
       - '11'
-    channel: latest/edge
+    channel: 1.7/edge
 
 relations:
 

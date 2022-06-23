@@ -1,19 +1,8 @@
 - project:
     templates:
-      - charm-unit-jobs
-    check:
-      jobs:
-      - bionic-train
-      - bionic-ussuri
-      - focal-ussuri
-      - focal-victoria
-      - focal-wallaby
-      - focal-xena:
-          voting: false
-      - hirsute-wallaby:
-         voting: false
-      - impish-xena:
-         voting: false
+      - charm-unit-jobs-py36
+      - charm-train-functional-jobs
     vars:
       needs_charm_build: true
       charm_build_name: placement
+      build_type: charmcraft

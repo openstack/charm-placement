@@ -11,6 +11,7 @@ tags:
 - openstack
 series:
 - jammy
+- kinetic
 subordinate: false
 requires:
   shared-db:

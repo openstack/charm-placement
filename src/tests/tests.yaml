@@ -24,10 +24,8 @@ smoke_bundles:
 
 dev_bundles:
   - jammy-antelope
-  - kinetic-zed
   - lunar-antelope
 
 tests_options:
   force_deploy:
-    - kinetic-zed
     - lunar-antelope

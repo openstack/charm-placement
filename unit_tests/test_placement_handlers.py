@@ -40,7 +40,9 @@ class TestRegisteredHooks(test_utils.TestRegisteredHooks):
                 'cluster_connected': ('ha.connected',),
             },
             'when_not': {
-                'init_db': ('db.synced',),
+                'init_db': ('db.synced', 'is-update-status-hook'),
+                'render_config': ('is-update-status-hook', ),
+                'cluster_connected': ('is-update-status-hook', ),
             },
         }
         # test that the hooks were registered via the

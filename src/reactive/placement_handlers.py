@@ -71,7 +71,6 @@ def init_db():
         disabled = placement.get_nova_placement_disabled()
         if disabled:
             placement_charm.disable_services()
-            placement_charm.db_migrate()
             placement_charm.db_sync()
             placement_charm.enable_services()
             placement_charm.assess_status()

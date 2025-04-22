@@ -80,7 +80,6 @@ class TestPlacementHandlers(test_utils.PatchHelper):
         handlers.init_db()
         placement.get_nova_placement_disabled.assert_called_once_with()
         self.placement_charm.disable_services.assert_called_once_with()
-        self.placement_charm.db_migrate.assert_called_once_with()
         self.placement_charm.db_sync.assert_called_once_with()
         self.placement_charm.enable_services.assert_called_once_with()
         self.placement_charm.assess_status.assert_called_once_with()

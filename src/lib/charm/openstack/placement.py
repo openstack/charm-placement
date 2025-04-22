@@ -22,7 +22,6 @@ import charms_openstack.ip as os_ip
 
 PLACEMENT_CONF = '/etc/placement/placement.conf'
 PLACEMENT_WSGI_CONF = '/etc/apache2/sites-available/placement-api.conf'
-PLACEMENT_MIGRATE_DB_CONF = '/etc/placement/migrate-db.rc'
 
 charms_openstack.charm.use_defaults('charm.default-select-release')
 
@@ -55,7 +54,6 @@ class PlacementCharm(charms_openstack.charm.HAOpenStackCharm):
     restart_map = {
         PLACEMENT_CONF: services,
         PLACEMENT_WSGI_CONF: services,
-        PLACEMENT_MIGRATE_DB_CONF: services,
     }
 
     ha_resources = ['vips', 'haproxy', 'dnsha']
@@ -71,11 +69,6 @@ class PlacementCharm(charms_openstack.charm.HAOpenStackCharm):
         ]),
     }
 
-    mysql_migrate_db = '/usr/share/placement/mysql-migrate-db.sh'
-
-    migrate_cmd = [mysql_migrate_db, '--migrate', '--skip-locks',
-                   PLACEMENT_MIGRATE_DB_CONF]
-
     sync_cmd = ['placement-manage', 'db', 'sync']
 
     def get_database_setup(self):
@@ -86,21 +79,6 @@ class PlacementCharm(charms_openstack.charm.HAOpenStackCharm):
             dict(database='nova_api',
                  username='nova',
                  prefix='novaapi')]
-
-    def db_migrate(self):
-        if not self.db_sync_done() and hookenv.is_leader():
-            try:
-                subprocess.check_call(self.migrate_cmd)
-            except subprocess.CalledProcessError as error:
-                hookenv.log('{} returncode={} output={}'.format(
-                    self.migrate_cmd, error.returncode, error.output),
-                    level=hookenv.DEBUG)
-                if error.returncode == 4 or error.returncode == 3:
-                    # 4: No data present in nova database (nothing to migrate)
-                    # 3: Migration has already completed
-                    return False
-                raise
-        return True
 
     def db_sync(self):
         if not self.db_sync_done() and hookenv.is_leader():

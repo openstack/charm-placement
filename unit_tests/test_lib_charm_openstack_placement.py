@@ -41,20 +41,6 @@ class TestPlacementCharm(Helper):
     @patch.object(placement.PlacementCharm, 'db_sync_done')
     @patch.object(placement.subprocess, 'check_call')
     @patch.object(placement.hookenv, 'is_leader')
-    def test_db_migrate(self, is_leader, check_call, db_sync_done):
-        c = placement.PlacementCharm()
-        is_leader.return_value = True
-        db_sync_done.return_value = False
-        c.db_migrate()
-        check_call.assert_called_with(
-            ['/usr/share/placement/mysql-migrate-db.sh',
-             '--migrate',
-             '--skip-locks',
-             '/etc/placement/migrate-db.rc'])
-
-    @patch.object(placement.PlacementCharm, 'db_sync_done')
-    @patch.object(placement.subprocess, 'check_call')
-    @patch.object(placement.hookenv, 'is_leader')
     @patch.object(placement.hookenv, 'leader_set')
     def test_db_sync(self, leader_set, is_leader, check_call, db_sync_done):
         c = placement.PlacementCharm()

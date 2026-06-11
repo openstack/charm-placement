@@ -25,8 +25,7 @@ smoke_bundles:
 dev_bundles:
   - jammy-yoga
   - jammy-zed
-  - kinetic-zed
 
 tests_options:
   force_deploy:
-    - kinetic-zed
+    - jammy-zed

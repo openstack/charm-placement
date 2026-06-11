@@ -140,7 +140,7 @@ applications:
     channel: yoga/edge
 
   placement:
-    charm: ../../../placement.charm
+    charm: ../../../placement_ubuntu@20.04-amd64.charm
     num_units: 1
     constraints: mem=1G
     options:

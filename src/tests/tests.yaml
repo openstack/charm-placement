@@ -18,7 +18,6 @@ configure:
 
 gate_bundles:
   - focal-xena
-  - impish-xena
 
 smoke_bundles:
   - focal-xena
@@ -29,5 +28,4 @@ dev_bundles:
 
 tests_options:
   force_deploy:
-    - impish-xena
     - jammy-yoga

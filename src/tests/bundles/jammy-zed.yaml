@@ -152,7 +152,7 @@ applications:
     charm: ch:vault
     to:
       - '11'
-    channel: 1.8/edge
+    channel: 1.8/stable
 
 relations:
 

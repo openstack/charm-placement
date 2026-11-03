@@ -18,11 +18,13 @@ machines:
   '4':
   '5':
   '6':
-  '7':
   '8':
   '9':
   '10':
   '11':
+  '12':
+  '13':
+  '14':
 
 
 applications:
@@ -90,26 +92,31 @@ applications:
     num_units: 1
     options:
       openstack-origin: *openstack-origin
-      manage-neutron-plugin-legacy-mode: true
-      neutron-plugin: ovs
+      manage-neutron-plugin-legacy-mode: false
+      enable-ml2-port-security: true
       flat-network-providers: physnet1
       neutron-security-groups: true
     to:
       - '6'
     channel: latest/edge
 
-  neutron-openvswitch:
-    charm: ch:neutron-openvswitch
+  ovn-central:
+    charm: ch:ovn-central
+    num_units: 3
+    options:
+      source: *openstack-origin
+    to:
+      - '12'
+      - '13'
+      - '14'
     channel: latest/edge
 
-  neutron-gateway:
-    charm: ch:neutron-gateway
-    num_units: 1
-    options:
-      openstack-origin: *openstack-origin
-      bridge-mappings: physnet1:br-ex
-    to:
-      - '7'
+  neutron-api-plugin-ovn:
+    charm: ch:neutron-api-plugin-ovn
+    channel: latest/edge
+
+  ovn-chassis:
+    charm: ch:ovn-chassis
     channel: latest/edge
 
   nova-cloud-controller:
@@ -119,6 +126,7 @@ applications:
       openstack-origin: *openstack-origin
       network-manager: Neutron
       debug: true
+      pci-in-placement: true
     to:
       - '8'
     channel: latest/edge
@@ -133,6 +141,7 @@ applications:
       enable-resize: true
       migration-auth-type: ssh
       debug: true
+      pci-report-in-placement: true
     to:
       - '9'
     channel: latest/edge
@@ -195,12 +204,6 @@ relations:
   - - 'glance'
     - 'rabbitmq-server'
 
-  - - 'neutron-gateway'
-    - 'nova-cloud-controller'
-
-  - - 'neutron-gateway:amqp'
-    - 'rabbitmq-server'
-
   - - 'neutron-api:shared-db'
     - 'neutron-api-mysql-router:shared-db'
   - - 'neutron-api-mysql-router:db-router'
@@ -213,19 +216,7 @@ relations:
     - 'nova-cloud-controller'
 
   - - 'neutron-api'
-    - 'neutron-openvswitch'
-
-  - - 'neutron-api'
     - 'keystone'
-
-  - - 'neutron-api'
-    - 'neutron-gateway'
-
-  - - 'neutron-openvswitch'
-    - 'nova-compute'
-
-  - - 'neutron-openvswitch'
-    - 'rabbitmq-server'
 
   - - 'placement:shared-db'
     - 'placement-mysql-router:shared-db'
@@ -253,3 +244,24 @@ relations:
     - 'glance:certificates'
   - - 'vault:certificates'
     - 'nova-cloud-controller:certificates'
+
+  - - 'neutron-api-plugin-ovn:neutron-plugin'
+    - 'neutron-api:neutron-plugin-api-subordinate'
+
+  - - 'ovn-central:ovsdb-cms'
+    - 'neutron-api-plugin-ovn:ovsdb-cms'
+
+  - - 'ovn-chassis:nova-compute'
+    - 'nova-compute:neutron-plugin'
+
+  - - 'ovn-chassis:ovsdb'
+    - 'ovn-central:ovsdb'
+
+  - - 'vault:certificates'
+    - 'ovn-central:certificates'
+
+  - - 'vault:certificates'
+    - 'ovn-chassis:certificates'
+
+  - - 'vault:certificates'
+    - 'neutron-api-plugin-ovn:certificates'

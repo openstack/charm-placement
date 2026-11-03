@@ -24,6 +24,29 @@ See [Ubuntu Cloud Archive][wiki-uca]. The underlying host's existing apt
 sources will be used if this option is not specified (this behaviour can be
 explicitly chosen by using the value of 'distro').
 
+#### `optimize-for-wide-provider-trees`
+
+The `optimize-for-wide-provider-trees` option tunes how Placement generates
+allocation candidates for wide, symmetric resource provider trees, such as
+those created by PCI-in-Placement or vGPU. The default is 'false', which
+renders nothing, so existing deployments are unchanged.
+
+The option is only honored on OpenStack Caracal (2024.1) and newer, and only
+if the installed python3-placement package supports it.
+
+#### `allocation-candidates-generation-strategy`
+
+The `allocation-candidates-generation-strategy` option selects the strategy
+used to generate allocation candidates. Allowed values are 'depth-first' and
+'breadth-first' (case-insensitive). The default is unset, which renders
+nothing. An invalid value is ignored with a WARNING in the unit log, and the
+unit stays active. The same version and package requirements as
+`optimize-for-wide-provider-trees` apply.
+
+Example:
+
+    juju config placement optimize-for-wide-provider-trees=true allocation-candidates-generation-strategy=breadth-first
+
 ## Deployment
 
 Placement is often containerised. Here a single unit is deployed to a new

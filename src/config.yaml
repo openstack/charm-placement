@@ -1,3 +1,29 @@
 options:
   openstack-origin:
     default: caracal
+  optimize-for-wide-provider-trees:
+    type: boolean
+    default: false
+    description: |
+      Enable the placement.conf option [workarounds]optimize_for_wide_provider_trees.
+      This optimizes allocation candidate generation for WIDE, symmetric
+      provider trees, i.e. many child resource providers under one root that
+      have inventory of the same resource class (for example PCI-in-Placement
+      or vGPU deployments).
+      .
+      The option is honored only on OpenStack Caracal (2024.1) or newer AND only if the installed python3-placement package supports it
+  allocation-candidates-generation-strategy:
+    type: string
+    default: ""
+    description: |
+      Sets the placement.conf option
+      [placement]allocation_candidates_generation_strategy. Allowed values
+      are 'depth-first' or 'breadth-first' (case-insensitive). If empty, the
+      option is not rendered and the upstream default (depth-first) applies.
+      .
+      'breadth-first' generates candidates round-robin across the viable root
+      providers and is recommended for wide symmetric provider trees. Invalid
+      values are ignored and a WARNING is logged.
+      .
+      The option is honored only on OpenStack Caracal (2024.1) or newer AND
+      only if the installed python3-placement package supports it
